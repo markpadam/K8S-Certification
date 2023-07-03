@@ -1,2 +1,2 @@
 # K8S-Certification
-Kubernetes Certified Admin Certification
+Certified Kubernetes Administrator Certification
