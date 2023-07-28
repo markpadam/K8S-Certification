@@ -34,3 +34,12 @@ kubectl auth can-i get deployments --as=system:serviceaccount:default:deploy-cka
 kubectl auth can-i get deployments --as=system:serviceaccount:default:deploy-cka19-trb
 kubectl create clusterrolebinding deploy-cka19-trb-role-binding --clusterrole=deploy-cka19-trb-role --serviceaccount=default:deploy-cka19-trb
 kubectl auth can-i get deployments --as=system:serviceaccount:default:deploy-cka19-trb
+
+kubectl --context cluster1 create serviceaccount deploy-cka20-arch
+kubectl --context cluster1 create clusterrole deploy-role-cka20-arch --resource=deployments --verb=get
+kubectl --context cluster1 create clusterrolebinding deploy-role-binding-cka20-arch --clusterrole=deploy-role-cka20-arch --serviceaccount=default:deploy-cka20-arch
+kubectl --context cluster1 auth can-i get deployments --as=system:serviceaccount:default:deploy-cka20-arch
+
+kubectl exec -it cyan-white-cka28-trb -- sh
+
+kubectl get rolebinding -o yaml | grep -B 5 -A 5 thor-cka24-trb
