@@ -1,4 +1,4 @@
-# Certified Kubernetes Administrator Study Nodes
+# Certified Kubernetes Administrator Study Notes
 Certified Kubernetes Administrator Certification
 
 Exam Curriculum (Topics): https://github.com/cncf/curriculum
