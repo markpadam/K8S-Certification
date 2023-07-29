@@ -1,0 +1,38 @@
+apiversion: extensions/v1
+kind: ReplicaSet
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: database
+        image: mysql
+        resources:
+          requests:
+            cpu: 1
+            memory: 2Gi
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        livelinessProbe:
+          tcpSocket:
+            port: 3306
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: datbase
+          mountPath: /var/lib/mysql
+    volumes:
+    - name: database
+      persistentVolumeClaim:
+        claimName: nfs-volume-claim

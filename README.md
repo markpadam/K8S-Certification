@@ -156,6 +156,8 @@ journalctl: https://www.youtube.com/watch?v=eClMJKPPUws
 
 CoreDNS: https://www.youtube.com/watch?v=qRiLmLACYSY (skip the intro and start the video 6min in, by this point i'm watching everything at 1.5x) (Link to the repo referenced in the vid: https://github.com/vmware-archive/tgik/tree/master/episodes/147 )
 
+iPTables:3
+
 
 ## Links
 CoreDNS: https://coredns.io/manual/toc/

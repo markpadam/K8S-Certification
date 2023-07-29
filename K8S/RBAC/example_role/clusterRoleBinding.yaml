@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: "2023-07-26T07:37:02Z"
+  name: blue-role-binding-cka21-arch
+  resourceVersion: "2679"
+  uid: 1ef20fa6-42cf-4c1a-b471-3855abf8e2dd
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: blue-role-cka21-arch
+subjects:
+- kind: ServiceAccount
+  name: blue-sa-cka21-arch
+  namespace: default

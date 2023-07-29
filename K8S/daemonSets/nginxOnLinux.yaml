@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-on-linux
+  labels:
+    app: nginx
+    os: linux
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+      os: linux
+  template:
+    metadata:
+      labels:
+        app: nginx
+        os: linux
+    spec:
+      nodeSelector:
+        os: linux
+      containers:
+      - name: nginx
+        image: :1.10.0

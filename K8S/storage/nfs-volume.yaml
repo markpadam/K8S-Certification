@@ -1,0 +1,15 @@
+# Example PV for NFS
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-volume
+  labels:
+    volume: nfs-volume
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+nfs:
+  server: 192.168.0.1
+  pqth: "/var/nfs"

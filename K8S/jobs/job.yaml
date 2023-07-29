@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: parallel
+  labels:
+    chaprter: jobs
+spec:
+  completions: 10
+  parallelism: 5
+  template:
+    spec:
+      containers:
+      - name: oneshot
+        image: gcr.io/kuar-demo/kuard-amd64:blue
+        command:
+        - /kuard
+        args:
+        - --keygen-enable
+        - --keygen-exit-on-complete
+        - --keygen-num-to-gen
+        - "10"
+      restartPolicy: Never

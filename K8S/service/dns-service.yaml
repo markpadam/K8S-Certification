@@ -1,0 +1,8 @@
+# External service using a dns name
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-database
+spec:
+  type: ExternalName
+  externalName: database.example.com
