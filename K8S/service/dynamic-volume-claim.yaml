@@ -1,0 +1,12 @@
+apiversion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dynamic-volume-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: dynamic-storageClass
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
