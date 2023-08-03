@@ -165,12 +165,24 @@ CoreDNS: https://coredns.io/manual/toc/
 
 ## Storage
 
+### Storage API Objects
+
+- PersistentVolume (PV)
+- PersistentVolumeClaim (PVC)
+- StorageClass (SC)
+
 ### Access Modes
 
-- RWO - ReadWriteOnce
-- ROX - ReadOnlyMany
-- RWX - ReadWriteMany
-- RWOP - ReadWriteOncePod
+- ReadWriteOnce (RWO)
+- ReadOnlyMany (ROX)
+- ReadWriteMany (RWX)
+- ReadWriteOncePod (RWOP)
+
+### Reclaim Policy
+
+- Retain
+- Delete
+- Recycle
 
 ### Service Types
 For some parts of your application (for example, frontends) you may want to expose a Service onto an external IP address, one that's accessible from outside of your cluster.
@@ -193,6 +205,13 @@ Example Format:
 podname.namespace.svc.cluster.local
 
 ## Running Commands in a Pod
+
+Run a single command in a pod:
 ```
 kubectl exec -it <pod_name> -- <command>
 ```
+Enter into the shell:
+```
+kubectl exec -it <pod_name> -- /bin/bash
+```
+

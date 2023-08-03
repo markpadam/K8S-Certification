@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: storagepod
+spec:
+  containers:
+  - name: storagecontainer
+    image: nginx
+    volumeMounts:
+    - name: storagevolume
+      mountPath: /location/to/mount/in/the/container
+  volumes:
+  - name: storagevolume
+    persistentVolumeClaim:
+      claimName: pvc0001

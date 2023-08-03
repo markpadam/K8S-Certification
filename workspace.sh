@@ -17,10 +17,10 @@ kubectl create secret generic secure-sec-cka12-arch --from-literal=color=darkblu
 kubectl get secret beta-sec-cka14-arch -o json --context cluster3 -n beta-ns-cka14-arch
 kubectl get secret beta-sec-cka14-arch --context cluster3 -n beta-ns-cka14-arch -o json | jq .data.secret | tr -d '"' | base64 -d > /opt/beta-sec-cka14-arch
 
-ETCDCTL_API=3 etcdctl --endpoints 192.24.158.12:2379 \
+ETCDCTL_API=3 etcdctl --endpoints 192.36.57.27:2379 \
   --cert=/etc/kubernetes/pki/etcd/server.crt \
   --key=/etc/kubernetes/pki/etcd/server.key \
-  --cacert=/etc/kubernetes/pki/etcd/ca.crt \ 
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
 
 kubectl --context cluster1 get pod -n kube-system kube-apiserver-cluster1-controlplane  -o jsonpath='{.metadata.labels.component}'
 
@@ -43,3 +43,8 @@ kubectl --context cluster1 auth can-i get deployments --as=system:serviceaccount
 kubectl exec -it cyan-white-cka28-trb -- sh
 
 kubectl get rolebinding -o yaml | grep -B 5 -A 5 thor-cka24-trb
+
+kubectl get event --field-selector involvedObject.name=red-probe-cka12-trb
+
+kubectl -n admin2406 get deployment -o custom-columns=DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers[].image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by=.metadata.name > /opt/admin2406_data
+
