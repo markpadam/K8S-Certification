@@ -199,7 +199,7 @@ Exposes the Service externally using an external load balancer. Kubernetes does 
 #### ExternalName
 Maps the Service to the contents of the externalName field (for example, to the hostname api.foo.bar.example). The mapping configures your cluster's DNS server to return a CNAME record with that external hostname value. No proxying of any kind is set up
 
-## internal DNS
+## Internal DNS
 
 Example Format:
 podname.namespace.svc.cluster.local
@@ -213,5 +213,16 @@ kubectl exec -it <pod_name> -- <command>
 Enter into the shell:
 ```
 kubectl exec -it <pod_name> -- /bin/bash
+```
+
+## Connecting to a Node
+
+Connecting to a node is as simple as ssh'ing into it, you can find the IP address of the node by running the following command:
+```
+kubectl get nodes -o wide
+```
+or you can just use the hostname:
+```
+ssh <hostname>
 ```
 
