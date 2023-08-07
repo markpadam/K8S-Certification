@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata: # metadata for the pod
+  name: pod-name
+  namespace: default
+  spec: # specification of the pod
+
+#the spec defined in the container has precedence over the spec defined in the pod!
+
+containers: # list of containers in the pod
+  - name: container-one
+    image: nginx
+    ports:
+      - containerPort: 80
+    spec: # specification of the container
+      serviceAccountName: service-account
+
+  - name: container-two
+    image: nginx
+    ports:
+      - containerPort: 80
+    spec: # specification of the container
+      serviceAccountName: service-account

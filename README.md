@@ -226,3 +226,27 @@ or you can just use the hostname:
 ssh <hostname>
 ```
 
+## Creating a user with openssl certificate
+Refer to /bash/openssl.sh for guidence on how to create a cert with openssl, then:
+```
+kubectl config set-credentials markpadam --client-certificate=/cert-location/markpadam.crt --client-key=/cert-location/markpadam.key
+kubectl config set-context markpadam-context --cluster=minikube --namespace=default --user=markpadam
+```
+
+## Role Based Access Control (RBAC)
+### Create a Role
+Default Cluster Roles:
+- cluster-admin
+- admin
+- edit
+- view
+
+Example of creating a role using kubectl
+```
+kubectl create role role-name --verb=list,get,wtach --resources=pods,deployments
+```
+### Create a RoleBinding
+Create a Role Binding using kubectl
+```
+kubectl create rolebinding role-binding-name  --role=ready-only --user=markpadam
+```
