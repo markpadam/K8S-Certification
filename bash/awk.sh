@@ -15,3 +15,5 @@ kubectl get pods | awk '{print $1 "|" $2}'
 
 # print the last column
 kubectl get pods | awk '{print $NF}'
+# print last column after the / separator
+kubectl get pods | awk -F/ '{print $NF}'
