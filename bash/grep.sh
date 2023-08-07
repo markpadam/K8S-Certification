@@ -9,3 +9,6 @@ kubectl get pods | grep -A 1 -B 1 "SearchString"
 
 # Use -C to print lines before and after the match.
 kubectl get pods | grep -C 1 "SearchString"
+
+# find string which begining with "SearchString"
+kubectl get pods | grep ^SearchString

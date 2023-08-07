@@ -21,3 +21,27 @@ containers: # list of containers in the pod
       - containerPort: 80
     spec: # specification of the container
       serviceAccountName: service-account
+    env: # list of environment variables
+      - name: ENV_VAR_ONE
+        value: "value"
+      - name: ENV_VAR_TWO
+        value: "value"
+
+      # value from a secret
+      - name: SECRET
+        valueFrom:
+          secretKeyRef:
+            name: secret-name
+            key: secret-key
+
+      # Get multiple values from a secret
+      - name: SECRET
+        valueFrom:
+          secretKeyRef:
+            name: secret-name
+
+# Secrets are mounted as files in the container
+    volumeMounts:
+      - name: secret-volume
+        mountPath: /etc/secret-volume
+        readOnly: true

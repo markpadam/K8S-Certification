@@ -250,3 +250,10 @@ Create a Role Binding using kubectl
 ```
 kubectl create rolebinding role-binding-name  --role=ready-only --user=markpadam
 ```
+
+### Secrets
+Create a Secret using kubectl
+```
+kubectl create secret generic secret-name --from-literal=key=value
+```
+Secrets are then mounted as volumes in pods, you can also use them as environment variables
