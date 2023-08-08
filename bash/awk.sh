@@ -17,3 +17,6 @@ kubectl get pods | awk '{print $1 "|" $2}'
 kubectl get pods | awk '{print $NF}'
 # print last column after the / separator
 kubectl get pods | awk -F/ '{print $NF}'
+
+# print the lines which match the pattern "SearchString"
+kubectl get pods | awk '/SearchString/ {print $0}'
