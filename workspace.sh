@@ -51,4 +51,10 @@ kubectl -n admin2406 get deployment -o custom-columns=DEPLOYMENT:.metadata.name,
 kubectl --context cluster1 get pod -n kube-system kube-apiserver-cluster1-controlplane  -o jsonpath='{.metadata.labels.component}'
 
 # Pull an image from a docker registry
-kubectl --context cluster1 run nginx --image=nginx --restart=Never 
+kubectl --context cluster1 run nginx --image=nginx --restart=Never
+
+# Create a configmap using kubectl examples
+kubectl --context cluster1 create configmap nginx-config --from-literal=server_name=nginx --from-literal=server_port=80
+kubectl --context cluster1 create configmap nginx-creds --from-literal=username=admin --from-literal=password=secret
+# get details of the configmap
+kubectl --context cluster1 get configmap nginx-config -o yaml
