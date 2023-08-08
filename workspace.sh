@@ -49,3 +49,6 @@ kubectl get event --field-selector involvedObject.name=red-probe-cka12-trb
 kubectl -n admin2406 get deployment -o custom-columns=DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers[].image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by=.metadata.name > /opt/admin2406_data
 
 kubectl --context cluster1 get pod -n kube-system kube-apiserver-cluster1-controlplane  -o jsonpath='{.metadata.labels.component}'
+
+# Pull an image from a docker registry
+kubectl --context cluster1 run nginx --image=nginx --restart=Never 
