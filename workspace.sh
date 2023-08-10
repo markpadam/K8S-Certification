@@ -58,3 +58,22 @@ kubectl --context cluster1 create configmap nginx-config --from-literal=server_n
 kubectl --context cluster1 create configmap nginx-creds --from-literal=username=admin --from-literal=password=secret
 # get details of the configmap
 kubectl --context cluster1 get configmap nginx-config -o yaml
+
+# label a node using kubectl
+kubectl label node node1 hardware=GPU
+
+# Taint a node using kubectl
+kubectl taint node node1 key=myTaint:NoSchedule
+kubectl taint node node1 key=myTaint:PreferNoSchedule
+kubectl taint node node1 key=myTaint:NoExecute
+# remove taint from a node
+kubectl taint node node1 key:NoSchedule-
+kubectl taint node node1 key:PreferNoSchedule-
+kubectl taint node node1 key:NoExecute-
+
+# Cordon a node using kubectl
+kubectl cordon node1
+kubectl drain node1 --ignore-daemonsets
+# Uncordon a node using kubectl
+kubectl uncordon node1
+

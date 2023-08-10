@@ -257,3 +257,46 @@ Create a Secret using kubectl
 kubectl create secret generic secret-name --from-literal=key=value
 ```
 Secrets are then mounted as volumes in pods, you can also use them as environment variables
+
+## Scheduling
+kube-scheduler is the component that is responsible for scheduling pods onto nodes. It does this by using a scheduling algorithm to determine which node is the best fit for a pod. The scheduler will take into account the following:
+- Resource requirements
+- Quality of Service (QoS) requirements
+- Affinity and anti-affinity specifications
+- Data locality
+- Inter-workload interference
+- Configurable policies and constraints
+- Other factors, such as the hardware/software/policy constraints specified by the node
+
+### Node Selectors
+Node selectors allow you to constrain which nodes your pod is eligible to be scheduled on, based on labels on the node. In order to use node selectors, you must first add a label to the node:
+```
+kubectl label nodes <node-name> <label-key>=<label-value>
+```
+
+### Node Affinity
+Node affinity allows you to constrain which nodes your pod is eligible to be scheduled on, based on labels on the node. In order to use node affinity, you must first add a label to the node:
+```
+kubectl label nodes <node-name> <label-key>=<label-value>
+```
+requiredDuringSchedulingIgnoredDuringExecution: The pod can only be scheduled to a node that matches the node affinity expressions. The pod will not be scheduled onto a node that does not match the expressions, even if the node is not yet running all of the pods that it is already scheduled to run.
+
+preferredDuringSchedulingIgnoredDuringExecution: The pod can be scheduled onto a node that matches the node affinity expressions, but it is not a hard requirement. The pod will not be scheduled onto a node that does not match the expressions, even if the node is not yet running all of the pods that it is already scheduled to run.
+
+podAntiAffinity: The pod can only be scheduled onto a node that does not match the node affinity expressions. The pod will not be scheduled onto a node that does match the expressions, even if the node is not yet running all of the pods that it is already scheduled to run.
+
+podAntiAffinity: The pod can be scheduled onto a node that does not match the node affinity expressions, but it is not a hard requirement. The pod will not be scheduled onto a node that does match the expressions, even if the node is not yet running all of the pods that it is already scheduled to run.
+
+### Taints and Tolerations
+Taints allow a node to repel a set of pods. Taints are set on nodes, and allow a node to refuse to schedule pods that do not tolerate the taints. Tolerations are applied to pods, and allow a pod to schedule onto nodes with matching taints.
+
+### Node Cordons
+Node cordons allow you to mark a node as unschedulable, so that no new pods will be scheduled onto the node, but existing pods will continue to run on it.
+
+
+## Networking
+### Services
+Services are an abstraction that defines a logical set of Pods and a policy by which to access them. Services enable a loose coupling between dependent Pods. A Service is defined using YAML (preferred) or JSON, like all Kubernetes objects.
+
+### Service Discovery
+Kubernetes supports two primary modes of finding a Service - environment variables and DNS.
