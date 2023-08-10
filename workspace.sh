@@ -77,3 +77,11 @@ kubectl drain node1 --ignore-daemonsets
 # Uncordon a node using kubectl
 kubectl uncordon node1
 
+
+# Expose a deployment using kubectl
+kubectl expose deployment nginx --port=80 --target-port=80 --name=nginx-service --type=NodePort
+kubectl expose deployment nginx --port=80 --target-port=80 --name=nginx-service --type=ClusterIP
+kubectl expose deployment nginx --port=80 --target-port=80 --name=nginx-service --type=LoadBalancer
+
+# Get listing of emdpoints using kubectl
+kubectl get endpoints nginx

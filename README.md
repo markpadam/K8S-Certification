@@ -300,3 +300,22 @@ Services are an abstraction that defines a logical set of Pods and a policy by w
 
 ### Service Discovery
 Kubernetes supports two primary modes of finding a Service - environment variables and DNS.
+
+### Kube Proxy & IPTables
+Kube Proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept. Kube Proxy maintains network rules on nodes. These network rules allow network communication to your Pods from network sessions inside or outside of your cluster.
+
+### NodePort
+NodePort is a service that exposes an application running on a set of Pods to the outside world. NodePort makes your application accessible from outside the Kubernetes cluster by using the IP address of the node and the static port you defined in the service configuration.
+
+### ClusterIP
+ClusterIP is a service that exposes an application running on a set of Pods to other Pods in the cluster. ClusterIP makes your application accessible from within the Kubernetes cluster.
+
+### LoadBalancer
+LoadBalancer is a service that exposes an application running on a set of Pods to the outside world. LoadBalancer makes your application accessible from outside the Kubernetes cluster by using the IP address of the load balancer.
+
+### Other Types of Services
+ExternalName is a service that exposes an application running on a set of Pods to the outside world. ExternalName makes your application accessible from outside the Kubernetes cluster by returning a value for the CNAME record.
+
+Headless is a service that exposes an application running on a set of Pods to other Pods in the cluster. Headless makes your application accessible from within the Kubernetes cluster by returning a set of A records for the Pods associated with the service.
+
+Without selectors is a service that does not select any Pods. Without selectors makes it possible to define a service without defining a selector. This type of service is not often needed.
