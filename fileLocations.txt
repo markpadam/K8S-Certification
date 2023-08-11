@@ -1,0 +1,6 @@
+# kubernetes certificate authority
+/etc/kubernetes/pki/
+
+# kubernetes scheduler
+/etc/kubernetes/scheduler.conf
+

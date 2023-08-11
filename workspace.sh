@@ -85,3 +85,36 @@ kubectl expose deployment nginx --port=80 --target-port=80 --name=nginx-service 
 
 # Get listing of emdpoints using kubectl
 kubectl get endpoints nginx
+
+# Export a certificate from config file then decode it
+kubectl config view --raw -o jsonpath='{ .users[*].user.client-certificate-data }' | base64 --decode > admin.crt
+openssl x509 -in admin.crt -text -noout | head -n 15
+
+# Get pods using kubectl and use the verbose flag
+kubectl get pods -v 6
+
+
+# Accessing the API Server inside a Pod
+# See how the secret is available inside the pod
+PODNAME=$(kubectl get pods -l app=nginx -o jsonpath='{ .items[*].metadata.name }')
+kubectl exec $PODNAME -it -- /bin/bash
+ls /var/run/secrets/kubernetes.io/serviceaccount/
+cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt 
+cat /var/run/secrets/kubernetes.io/serviceaccount/namespace 
+cat /var/run/secrets/kubernetes.io/serviceaccount/token 
+# Load the token and cacert into variables for reuse
+TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+CACERT=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+# You're able to authenticate to the API Server with the user...and retrieve some basic and safe information from the API Server
+curl --cacert $CACERT -X GET https://kubernetes.default.svc/api/ # This will fail with a 403, but it's just to show you how to use the cacert
+curl --cacert $CACERT --header "Authorization: Bearer $TOKEN" -X GET https://kubernetes.default.svc/api/
+# But it doesn't have any permissions to access objects...this user is not authorized to access pods
+curl --cacert $CACERT --header "Authorization: Bearer $TOKEN" -X GET https://kubernetes.default.svc/api/v1/namespaces/default/pods
+# We can also use impersonation to help with our authorization testing
+kubectl auth can-i list pods --as=system:serviceaccount:default:mysvcaccount1
+kubectl get pods -v 6 --as=system:serviceaccount:default:mysvcaccount1
+
+
+# View the kubernetes Certificate Authority
+ls -la /etc/kubernetes/pki/
+openssl x509 -in /etc/kubernetes/pki/ca.crt -text -noout | head -n 15

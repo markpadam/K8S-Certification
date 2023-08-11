@@ -319,3 +319,40 @@ ExternalName is a service that exposes an application running on a set of Pods t
 Headless is a service that exposes an application running on a set of Pods to other Pods in the cluster. Headless makes your application accessible from within the Kubernetes cluster by returning a set of A records for the Pods associated with the service.
 
 Without selectors is a service that does not select any Pods. Without selectors makes it possible to define a service without defining a selector. This type of service is not often needed.
+
+
+## Ingress
+Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
+
+### Ingress Resources
+Ingress resources are used to configure the ingress rules and routes for individual Kubernetes services. An ingress rule is created to route traffic to a Kubernetes service. The traffic routing is controlled by rules defined on the ingress resource.
+
+### Ingress Controllers
+Ingress controllers are responsible for reading the ingress resource information and processing that data accordingly. Different ingress controllers support different annotations. The ingress controller is responsible for reading the ingress resource information and processing that data accordingly.
+
+### Ingress Class
+Ingress class is an annotation that specifies which ingress controller should be used to process the ingress resource information. The ingress class annotation is used to specify which ingress controller should be used to process the ingress resource information.
+
+
+## Security
+### Authentication
+Authentication is the process of verifying the identity of a user or process. Kubernetes supports a number of authentication mechanisms, including X.509 certificates, static tokens, and authentication plugins.
+
+### Authorization
+Authorization is the process of determining whether a user or process has access to a given resource. Kubernetes supports a number of authorization mechanisms, including ABAC, RBAC, Webhook, and Node.
+
+### Admission Controllers
+Admission controllers are a set of plug-ins that are invoked by the API server prior to persisting the object. Admission controllers are a set of plug-ins that are invoked by the API server prior to persisting the object.
+
+### Certificate based Authentication
+Certificate based authentication is the process of verifying the identity of a user or process using a certificate. Certificate based authentication is the process of verifying the identity of a user or process using a certificate.
+
+
+### Certificates and TLS
+Certificates are used to verify the identity of a user or process. TLS is used to encrypt the communication between two parties. Certificates are used to verify the identity of a user or process. TLS is used to encrypt the communication between two parties.
+
+The self-signed certificate authority files are locationed here:
+- /etc/kubernetes/pki/ca.crt
+- /etc/kubernetes/pki/ca.key
+
+
