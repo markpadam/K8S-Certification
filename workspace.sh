@@ -118,3 +118,6 @@ kubectl get pods -v 6 --as=system:serviceaccount:default:mysvcaccount1
 # View the kubernetes Certificate Authority
 ls -la /etc/kubernetes/pki/
 openssl x509 -in /etc/kubernetes/pki/ca.crt -text -noout | head -n 15
+
+# Use kubectl to get a certificate signing request
+kubectl get csr demouser -o jsonpath='{ .items[*].metadata.name }' | base64 --decode > demouser.cst

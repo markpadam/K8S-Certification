@@ -4,3 +4,6 @@
 # kubernetes scheduler
 /etc/kubernetes/scheduler.conf
 
+# local kube config file
+~/.kube/config
+
