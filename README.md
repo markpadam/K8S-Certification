@@ -352,7 +352,32 @@ Certificate based authentication is the process of verifying the identity of a u
 Certificates are used to verify the identity of a user or process. TLS is used to encrypt the communication between two parties. Certificates are used to verify the identity of a user or process. TLS is used to encrypt the communication between two parties.
 
 The self-signed certificate authority files are locationed here:
+```
 - /etc/kubernetes/pki/ca.crt
 - /etc/kubernetes/pki/ca.key
+```
 
-
+## Logging & Events
+### Logging
+Logging is the process of recording events that occur in a system. Kubernetes supports a number of logging mechanisms, including stdout, stderr, and syslog.
+Acces logs are stored in the following location:
+```
+/var/log/kube-apiserver.log
+/var/log/kube-controller-manager.log
+/var/log/kube-scheduler.log
+```
+logs can be accessed using the following command:
+```
+journalctl -u kube-apiserver
+kubectl logs <pod-name>
+```
+You can also log into the node and access the logs of a non running container using the following command:
+```
+crictl --runtime-endpoint /var/run/crio/crio.sock logs <container-id>
+```
+### Events
+Events are records of discrete occurrences within the cluster. Events are records of discrete occurrences within the cluster.
+To access events with the kubectl use:
+```
+kubectl get events
+```

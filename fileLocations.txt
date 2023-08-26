@@ -7,3 +7,17 @@
 # local kube config file
 ~/.kube/config
 
+# etcd data directory
+/var/lib/etcd/
+
+# location of static pod manifests
+/etc/kubernetes/manifests/
+
+# Logging directory
+/var/log/containers/
+
+# kublet systemd config location
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+
+# kubelet component config
+/var/lib/kubelet/config.yaml

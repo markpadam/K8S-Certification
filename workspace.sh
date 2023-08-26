@@ -1,3 +1,34 @@
+_  __     _                          _
+| |/ /   _| |__   ___ _ __ _ __   ___| |_ ___  ___
+| ' / | | | '_ \ / _ \ '__| '_ \ / _ \ __/ _ \/ __|
+| . \ |_| | |_) |  __/ |  | | | |  __/ ||  __/\__ \
+|_|\_\__,_|_.__/ \___|_|  |_| |_|\___|\__\___||___/
+
+### Some useful commands using realworld examples
+
+## Using top to get resource usage
+kubectl top nodes --context cluster1 --no-headers | sort -nr -k4 | head -1
+kubectl top pods --sort-by=cpu
+kubectl top pods --sort-by=memory
+kubectl top pods --containers
+
+## Troubleshoting commands
+kubectl get event --field-selector involvedObject.name=red-probe-cka12-trb
+# Get event with kubectl and sort by timestamp
+kubectl get events --sort-by='.metadata.creationTimestamp'
+# Search for events with kubectl by field selector
+kubectl get events --field-selector type=Warning
+kubectl get events --field-selector type=Warning,reasontype=failed
+# check services are running at the OS level
+systemctl status kubelet.service
+# Ensure the service is set to start on boot
+systemctl enable kubelet.service
+# Start a stopped service
+systemctl start kubelet.service
+
+
+
+
 kubectl --context cluster1 create serviceaccount deploy-cka20-arch
 kubectl --context cluster1 create clusterrole deploy-role-cka20-arch --resource=deployments --verb=get
 kubectl --context cluster1 create clusterrolebinding deploy-role-binding-cka20-arch --clusterrole=deploy-role-cka20-arch --serviceaccount=default:deploy-cka20-arch
@@ -44,7 +75,6 @@ kubectl exec -it cyan-white-cka28-trb -- sh
 
 kubectl get rolebinding -o yaml | grep -B 5 -A 5 thor-cka24-trb
 
-kubectl get event --field-selector involvedObject.name=red-probe-cka12-trb
 
 kubectl -n admin2406 get deployment -o custom-columns=DEPLOYMENT:.metadata.name,CONTAINER_IMAGE:.spec.template.spec.containers[].image,READY_REPLICAS:.status.readyReplicas,NAMESPACE:.metadata.namespace --sort-by=.metadata.name > /opt/admin2406_data
 
@@ -99,9 +129,9 @@ kubectl get pods -v 6
 PODNAME=$(kubectl get pods -l app=nginx -o jsonpath='{ .items[*].metadata.name }')
 kubectl exec $PODNAME -it -- /bin/bash
 ls /var/run/secrets/kubernetes.io/serviceaccount/
-cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt 
-cat /var/run/secrets/kubernetes.io/serviceaccount/namespace 
-cat /var/run/secrets/kubernetes.io/serviceaccount/token 
+cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+cat /var/run/secrets/kubernetes.io/serviceaccount/namespace
+cat /var/run/secrets/kubernetes.io/serviceaccount/token
 # Load the token and cacert into variables for reuse
 TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
 CACERT=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
@@ -121,3 +151,5 @@ openssl x509 -in /etc/kubernetes/pki/ca.crt -text -noout | head -n 15
 
 # Use kubectl to get a certificate signing request
 kubectl get csr demouser -o jsonpath='{ .items[*].metadata.name }' | base64 --decode > demouser.cst
+
+
