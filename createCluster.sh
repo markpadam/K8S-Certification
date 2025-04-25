@@ -36,3 +36,17 @@ sudo containerd config default | sudo tee /etc/containerd/config.toml
 sudo sed -i 's/            SystemdCgroup = false/            SystemdCgroup = true/' /etc/containerd/config.toml
 
 sudo systemctl restart containerd
+
+
+sudo kubeadm init
+
+#configure api access
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+#Install Calico
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yamlkubectl
+
+#Join worker nodes
+kubeadm token create --print-join-command
