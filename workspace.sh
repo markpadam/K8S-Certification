@@ -152,4 +152,12 @@ openssl x509 -in /etc/kubernetes/pki/ca.crt -text -noout | head -n 15
 # Use kubectl to get a certificate signing request
 kubectl get csr demouser -o jsonpath='{ .items[*].metadata.name }' | base64 --decode > demouser.cst
 
-
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: azure-arc-secret
+  annotations:
+    kubernetes.io/service-account.name: azure-arc
+type: kubernetes.io/service-account-token
+EOF
